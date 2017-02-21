@@ -133,6 +133,29 @@ interest of saving time. Just use a symbolic link in the
 web directory that points to the mounted DVD filesystem, and 
 update the appropriate client repo configuration to point to it.
 
+#### Find your list of yum repos
+run ```yum repolist```
+
+```
+yum repolist
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.clouvider.net
+ * extras: mirrors.clouvider.net
+ * updates: mirrors.clouvider.net
+repo id                                               repo name                                                status
+base/7/x86_64                                         CentOS-7 - Base                                          9,363
+extras/7/x86_64                                       CentOS-7 - Extras                                          263
+updates/7/x86_64                                      CentOS-7 - Updates                                         834
+repolist: 10,460
+```
+
+#### Temporarily disable a yum repo
+The following command accepts ```*``` wildcards in the [repo] section.
+
+```yum --disablerepo=[repo] ```
+
+
 
 
 
