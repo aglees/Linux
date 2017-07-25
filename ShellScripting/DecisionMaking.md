@@ -40,7 +40,6 @@ It is possible to chain expressions with
 ```-a``` as the AND operator  
 ```-o``` as the OR operator
 
-
 > **Tip:** ```man test``` has more examples of operators.
 
 > **Extra Info:** ```[ ]``` is actually a shortcut for the ```/bin/test``` function
