@@ -45,12 +45,18 @@ When you turn on the server, the following happens **_sequentially_**:
 * On PC's the BIOS is responsible for executing the boot code. It is much simpler than the firmware of a proprietary machine.
 * A typical PC will have several types of BIOS: one for the machine, anothe for the video card and a third for SCSI if it's available.
 * BIOS configuration lets you choose the media from which you want the system to start, and the order by which it'll search for alternate media (or the network), should the first one fail.
-* Once selected, the boot media has it's _**first 512 bytes**_ checked to determine which partition contains the ```boot loader```.
+* Once selected, the boot media has it's _**first 512 bytes**_ checked to determine which partition contains the ```boot loader```. _**This is really important**_.
 * The ```boot loader``` is responsible for loading the ```kernel```.
 
+# Stage 2 - GRUB
+* **GR**and **U**inified **B**oot Loader
+* It is the default boot loader for Linux and UNIX systems running on Intel processors
+* It is responsible for loading the ```kernel```, together with some options that can be tweaked by the system administrator.
+* It reads configuration options from ```/boot/grub/menu.lst``` (on Ubuntu and SUSE), and ```/boot/grub/grub.conf``` on Red Hat.
+* The configuration file has the following options:
+    * ```default=number``` indicates which operating system/kernel to boot the system to. The list starts at ```0```. When the new kernel is installed, like through system upgrades, the old ones stay available for booting in the menu, so that you can choose to boot from them if the new one breaks the system.
+    * ```timeout=number``` sets the number of seconds the system would wait for a keyboard interruption before it loads the configured options.
+    * ```root (hd0,0) ``` is where to find the partition from which to load the system. The first disk and the first partition on the machine are defined as ```0``` and ```0``` respectively.
+    * ```kernel``` loads the kernel from the specified path
 
-
-
-
-
-
+# Stage 3 - 
