@@ -90,7 +90,7 @@ Two flavours:
 # Kernel command switches
 * You can interrupt GRUB loading, while in the timeout period, by pressing any key. You can then select the kernel you wish to boot from, and press ```a``` to start adding command switches.
 * Examples of useful switches are:
-    * ```l``` or ```single``` to enter single user mode (useful for recovery as no login prompts, therefore can be used for resetting passwords).
+    * ```1``` or ```single``` to enter single user mode (useful for recovery as no login prompts, therefore can be used for resetting passwords).
     * ```n``` where n is the run level to where you want the system to boot (covered later)
     * ```init=/bin/bash``` will let the kernel load ```/bin/bash``` instead of the ```/sbin/init``` process. Both of these options will allow you to access the system as root without a password. 
     
@@ -143,5 +143,32 @@ Two flavours:
     * ```chkconfig --del script_name``` will remove the script from the configuration
     * ```chkconfig --list``` will print all the configured startup scripts. Works best with ```grep```.
 * Red Hat also offers the ```/etc/rc.d/rc.local``` file, which is run after all other boot scripts have finished execution. You can use it to add custom startup scripts.
+
+# Shutting down and rebooting the system
+* The ```shutdown``` command is the safest way to halt a system, or make it enter _**single user mode**_.
+* This command has many different arguments, some of which are used to specify a grace period for the users to save their work and log out before the system is halted. You can also specify a friendly message explaining the reason for shutdown and the estimated down time.
+* Examples:
+    * ```shutdown -h time "message"``` will shutdown the system at the specified time, sending the passed on message to the logged in users. The command can also be used to schedule the shutdown some minutes later, for example ```shutdown +10 "message"``` will shutdown the system after 10 minutes from now.
+    * The ```-h``` forces the system to sync filesystems. That is, write any buffers in memory to the disk. The ```-n``` ignores this step. It is primarily used by the ```fsck``` command after repairing the root partition to ensure tha the kernel does not overwrite the repaired superblocks with cached data.
+* Rebooting the system is done by using the ```-r``` argument with the ```shutdown``` command. You can use all other arguments for reboot.
+
+```
+[.]$ shutdown --help
+Usage: shutdown [OPTION]... TIME [MESSAGE]
+Bring the system down.
+
+Options:
+  -r                          reboot after shutdown
+  -h                          halt or power off after shutdown
+  -H                          halt after shutdown (implies -h)
+  -P                          power off after shutdown (implies -h)
+  -c                          cancel a running shutdown
+  -k                          only send warnings, don't shutdown
+  -q, --quiet                 reduce output to errors only
+  -v, --verbose               increase output to include informational messages
+      --help                  display this help and exit
+      --version               output version information and exit
+```
+
 
 
